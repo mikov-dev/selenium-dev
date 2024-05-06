@@ -1,9 +1,7 @@
 package pagetests;
 
 import org.config.BaseTest;
-import org.pages.BrowserTabsPage;
 import org.pages.ButtonsPage;
-import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;

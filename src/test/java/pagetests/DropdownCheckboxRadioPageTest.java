@@ -1,7 +1,6 @@
 package pagetests;
 
 import org.config.BaseTest;
-import org.pages.ButtonsPage;
 import org.pages.DropdownCheckboxRadioPage;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -16,8 +15,6 @@ public class DropdownCheckboxRadioPageTest extends BaseTest {
         dropdownCheckboxRadioPage = new DropdownCheckboxRadioPage(driver);
         driver.get(dropdownCheckboxRadioPage.baseUrl);
     }
-
-
 
 
     @AfterTest

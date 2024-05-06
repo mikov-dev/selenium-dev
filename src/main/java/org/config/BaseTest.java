@@ -19,7 +19,7 @@ public class BaseTest {
     WebElement element;
 
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "src/main/resources/webdrivers/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "src/main/resources/webdrivers/chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
     }
@@ -91,5 +91,9 @@ public class BaseTest {
         element = driver.findElement(button);
         js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].removeAttribute('disabled')", element);
+    }
+
+    public void clickToSelectElement(By element) {
+        driver.findElement(element).click();
     }
 }
