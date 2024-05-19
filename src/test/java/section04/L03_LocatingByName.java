@@ -10,7 +10,7 @@ public class L03_LocatingByName extends BaseTest {
 
     @BeforeMethod
     private void beforeMethod() {
-        setUp();
+        setUpWithChrome();
         driver.get("https://www.automationtesting.co.uk/contactForm.html");
     }
 

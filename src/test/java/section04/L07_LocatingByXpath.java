@@ -12,7 +12,7 @@ public class L07_LocatingByXpath extends BaseTest {
 
     @BeforeMethod
     private void beforeMethod() {
-        setUp();
+        setUpWithChrome();
         driver.get("https://www.automationtesting.co.uk/buttons.html");
     }
 

@@ -10,7 +10,7 @@ public class L02_LocatingById extends BaseTest {
 
     @BeforeMethod
     private void beforeMethod() {
-        setUp();
+        setUpWithChrome();
         driver.get("https://www.automationtesting.co.uk/buttons.html");
     }
 

@@ -1,11 +1,13 @@
 package org.config;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 
@@ -18,9 +20,15 @@ public class BaseTest {
     JavascriptExecutor js;
     WebElement element;
 
-    public void setUp() {
+    public void setUpWithChrome() {
         System.setProperty("webdriver.chrome.driver", "src/main/resources/webdrivers/chromedriver.exe");
         driver = new ChromeDriver();
+        driver.manage().window().maximize();
+    }
+
+    public void setUpWithFirefox() {
+        System.setProperty("webdriver.gecko.driver", "src/main/resources/webdrivers/geckodriver.exe");
+        driver = new FirefoxDriver();
         driver.manage().window().maximize();
     }
 
@@ -95,5 +103,10 @@ public class BaseTest {
 
     public void clickToSelectElement(By element) {
         driver.findElement(element).click();
+    }
+
+    public WebElement waitForElement(By locator, int timeout) {
+        WebDriverWait wait = new WebDriverWait(driver, timeout);
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 }

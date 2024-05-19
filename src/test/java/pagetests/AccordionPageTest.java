@@ -14,7 +14,7 @@ public class AccordionPageTest extends BaseTest {
 
     @BeforeTest
     private void beforeTest() {
-        setUp();
+        setUpWithChrome();
         accordionPage = new AccordionPage(driver);
         driver.get(accordionPage.baseUrl);
     }

@@ -12,7 +12,7 @@ public class ButtonsPageTest extends BaseTest {
 
     @BeforeTest
     private void beforeTest() {
-        setUp();
+        setUpWithChrome();
         buttonsPage = new ButtonsPage(driver);
         driver.get(buttonsPage.baseUrl);
     }

@@ -11,7 +11,7 @@ public class L04_LocatingByLinkText extends BaseTest {
     MainPage mainPage;
     @BeforeMethod
     private void beforeMethod() {
-        setUp();
+        setUpWithChrome();
         driver.get("https://www.automationtesting.co.uk");
         mainPage = new MainPage(driver);
     }

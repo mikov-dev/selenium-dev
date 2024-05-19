@@ -13,7 +13,7 @@ public class MainPageTest extends BaseTest {
 
     @BeforeTest
     private void beforeTest() {
-        setUp();
+        setUpWithChrome();
         mainPage = new MainPage(driver);
         driver.get(mainPage.baseUrl);
         mainPage.acceptCookies();

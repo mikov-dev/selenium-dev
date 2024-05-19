@@ -11,7 +11,7 @@ public class DropdownCheckboxRadioPageTest extends BaseTest {
 
     @BeforeTest
     private void beforeTest() {
-        setUp();
+        setUpWithChrome();
         dropdownCheckboxRadioPage = new DropdownCheckboxRadioPage(driver);
         driver.get(dropdownCheckboxRadioPage.baseUrl);
     }

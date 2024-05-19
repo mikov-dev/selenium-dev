@@ -7,13 +7,13 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class L05_IsEnabled extends BaseTest {
+public class L05_IsEnabledTest extends BaseTest {
 
     ButtonsPage buttonsPage;
 
     @BeforeMethod
     private void beforeMethod() {
-        setUp();
+        setUpWithChrome();
         buttonsPage = new ButtonsPage(driver);
         driver.get(buttonsPage.baseUrl);
     }

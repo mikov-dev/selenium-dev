@@ -6,13 +6,13 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class L03_SendData extends BaseTest {
+public class L03_SendDataTest extends BaseTest {
 
     ContactFormPage contactForm;
 
     @BeforeMethod
     private void beforeMethod() {
-        setUp();
+        setUpWithChrome();
         contactForm = new ContactFormPage(driver);
         driver.get(contactForm.baseUrl);
     }

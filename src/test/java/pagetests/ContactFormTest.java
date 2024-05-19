@@ -12,7 +12,7 @@ public class ContactFormTest extends BaseTest {
 
     @BeforeTest
     private void beforeTest() {
-        setUp();
+        setUpWithChrome();
         contactForm = new ContactFormPage(driver);
         driver.get(contactForm.baseUrl);
     }

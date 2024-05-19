@@ -13,7 +13,7 @@ public class BrowserTabsTest extends BaseTest {
 
     @BeforeTest
     private void beforeTest() {
-        setUp();
+        setUpWithChrome();
         browserTabsPage = new BrowserTabsPage(driver);
         driver.get(browserTabsPage.baseUrl);
     }
