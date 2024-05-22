@@ -4,12 +4,15 @@ import lombok.Getter;
 import lombok.Setter;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -19,15 +22,33 @@ public class BaseTest {
     Actions actions;
     JavascriptExecutor js;
     WebElement element;
+    ChromeOptions options;
+    String chromedriverLocation = "src/main/resources/webdrivers/chromedriver.exe";
+    String geckoDriverLocation = "src/main/resources/webdrivers/geckodriver.exe";
 
     public void setUpWithChrome() {
-        System.setProperty("webdriver.chrome.driver", "src/main/resources/webdrivers/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", chromedriverLocation);
         driver = new ChromeDriver();
         driver.manage().window().maximize();
     }
 
+    public void setUpWithChromeOptions(List<String> chromeOptions) {
+        System.setProperty("webdriver.chrome.driver", chromedriverLocation);
+        options = new ChromeOptions();
+        options.addArguments(chromeOptions);
+        driver = new ChromeDriver(options);
+    }
+
+    public void setUpWithChromeOptionsAndDesiredCapabilities(List<String> chromeOptions, DesiredCapabilities desiredCapabilities) {
+        System.setProperty("webdriver.chrome.driver", chromedriverLocation);
+        options = new ChromeOptions();
+        options.merge(desiredCapabilities);
+        options.addArguments(chromeOptions);
+        driver = new ChromeDriver(options);
+    }
+
     public void setUpWithFirefox() {
-        System.setProperty("webdriver.gecko.driver", "src/main/resources/webdrivers/geckodriver.exe");
+        System.setProperty("webdriver.gecko.driver", geckoDriverLocation);
         driver = new FirefoxDriver();
         driver.manage().window().maximize();
     }
@@ -35,6 +56,26 @@ public class BaseTest {
     public void scrollIntoView(WebDriver driver, By by) {
         js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView(true);", driver.findElement(by));
+    }
+
+    public void scrollIntoView(WebDriver driver, WebElement element) {
+        js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(true);", element);
+    }
+
+    public void clickUsingJavaScript(WebDriver driver, By by) {
+        js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].click();", driver.findElement(by));
+    }
+
+    public void clickUsingJavaScript(WebDriver driver, WebElement element) {
+        js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].click();", element);
+    }
+
+    public void clickTwoElementsUsingJavascript(WebDriver driver, WebElement element, WebElement element2) {
+        js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].click(), arguments[1].click()", element, element2);
     }
 
     public void dragAndDrop(WebDriver driver, By from, By to) {
