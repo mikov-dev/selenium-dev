@@ -10,13 +10,14 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.verifications.Verifications;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 @Setter
-public class BaseTest {
+public class BaseTest extends Verifications {
 
     public WebDriver driver;
     Actions actions;
@@ -149,5 +150,13 @@ public class BaseTest {
     public WebElement waitForElement(By locator, int timeout) {
         WebDriverWait wait = new WebDriverWait(driver, timeout);
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+
+    public void deleteAllCookies() {
+        driver.manage().deleteAllCookies();
+    }
+
+    public void reloadPage() {
+        driver.navigate().refresh();
     }
 }

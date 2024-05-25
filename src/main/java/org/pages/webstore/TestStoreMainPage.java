@@ -21,6 +21,15 @@ public class TestStoreMainPage extends BasePage {
     public By forgotPasswordLink = By.cssSelector(".forgot-password a");
     public By submitButton = By.id("submit-login");
     public By accountName = By.cssSelector(".account span");
+    public By headerSignInLink = By.cssSelector("a span.hidden-sm-down");
+
+    public By clothesMainLink = By.id("category-3");
+    public By firstProduct = By.cssSelector("a img[alt='Hummingbird printed t-shirt']");
+    public By firstProductHeadline = By.cssSelector("h1.h1");
+    public By cartProductsCount = By.cssSelector(".cart-products-count");
+    public By addToCartButton = By.cssSelector("button.add-to-cart");
+    public By continueShoppingButton = By.cssSelector(".cart-content-btn .btn-secondary");
+
 
     // Methods to interact with page elements
 
@@ -48,6 +57,13 @@ public class TestStoreMainPage extends BasePage {
 
     public void submitForm() {
         driver.findElement(submitButton).click();
+    }
+
+    public void signIn(String email, String password) {
+        clickSignInLink();
+        enterEmail(email);
+        enterPassword(password);
+        submitForm();
     }
 
 }

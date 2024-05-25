@@ -4,16 +4,16 @@ import org.config.BaseTest;
 import org.openqa.selenium.WebElement;
 import org.pages.AccordionPage;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class AccordionPageTest extends BaseTest {
 
     AccordionPage accordionPage;
 
-    @BeforeTest
-    private void beforeTest() {
+    @BeforeClass
+    private void BeforeClass() {
         setUpWithChrome();
         accordionPage = new AccordionPage(driver);
         driver.get(accordionPage.baseUrl);
@@ -49,8 +49,8 @@ public class AccordionPageTest extends BaseTest {
         Assert.assertTrue(seleniumGridText.getText().contains("The remote control server of Selenium"));
     }
 
-    @AfterTest
-    private void afterTest() {
+    @AfterClass
+    private void AfterClass() {
         driver.quit();
     }
 }

@@ -3,16 +3,16 @@ package pagetests;
 import org.config.BaseTest;
 import org.pages.BrowserTabsPage;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class BrowserTabsTest extends BaseTest {
 
     BrowserTabsPage browserTabsPage;
 
-    @BeforeTest
-    private void beforeTest() {
+    @BeforeClass
+    private void BeforeClass() {
         setUpWithChrome();
         browserTabsPage = new BrowserTabsPage(driver);
         driver.get(browserTabsPage.baseUrl);
@@ -26,7 +26,7 @@ public class BrowserTabsTest extends BaseTest {
         Assert.assertTrue(driver.getCurrentUrl().contains("www.google.com"));
     }
 
-    @AfterTest
+    @AfterClass
     private void tearDown() {
         driver.quit();
     }

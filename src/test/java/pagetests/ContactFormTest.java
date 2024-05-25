@@ -10,8 +10,8 @@ public class ContactFormTest extends BaseTest {
 
     ContactFormPage contactForm;
 
-    @BeforeTest
-    private void beforeTest() {
+    @BeforeClass
+    private void BeforeClass() {
         setUpWithChrome();
         contactForm = new ContactFormPage(driver);
         driver.get(contactForm.baseUrl);
@@ -41,7 +41,7 @@ public class ContactFormTest extends BaseTest {
         Assert.assertEquals(driver.findElement(contactForm.firstNameField).getAttribute("placeholder"), "First Name");
     }
 
-    @AfterTest
+    @AfterClass
     private void tearDown() {
         driver.quit();
     }

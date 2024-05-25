@@ -2,17 +2,17 @@ package pagetests;
 
 import org.config.BaseTest;
 import org.pages.ButtonsPage;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
+
+import java.util.List;
 
 public class ButtonsPageTest extends BaseTest {
 
     ButtonsPage buttonsPage;
 
-    @BeforeTest
-    private void beforeTest() {
-        setUpWithChrome();
+    @BeforeMethod
+    private void BeforeClass() {
+        setUpWithChromeOptions(List.of("--start-maximized"));
         buttonsPage = new ButtonsPage(driver);
         driver.get(buttonsPage.baseUrl);
     }
@@ -29,8 +29,9 @@ public class ButtonsPageTest extends BaseTest {
     void verifyTheSecondButtonFunctionality() throws InterruptedException {
         moveToAndClick(buttonsPage.buttonTwo);
         Thread.sleep(1000);
-        var text = driver.switchTo().alert().getText();
-        assert text.equals("You clicked the second button!");
+        var text = driver.switchTo().alert();
+        verifyAlertTextEquals(text, "You clicked the second button!");
+        //assert text.equals("You clicked the second button!");
     }
 
     @Test(description = "Verify the functionality of the third button.")
@@ -51,7 +52,7 @@ public class ButtonsPageTest extends BaseTest {
     }
 
 
-    @AfterTest
+    @AfterMethod
     private void tearDown() {
         driver.quit();
     }

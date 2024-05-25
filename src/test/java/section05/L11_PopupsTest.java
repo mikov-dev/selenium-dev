@@ -39,13 +39,12 @@ public class L11_PopupsTest extends BaseTest {
         }
         driver.switchTo().window(mainWindow);
         Thread.sleep(2000);
-        alertsAndPopUpsPage.acceptAlert();
     }
 
 
-    @AfterMethod
+/*    @AfterMethod
     private void tearDown() {
         driver.quit();
-    }
+    }*/
 
 }

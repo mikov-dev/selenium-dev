@@ -2,7 +2,6 @@ package teststoretests;
 
 import org.config.BaseTest;
 import org.pages.webstore.TestStoreMainPage;
-import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -21,12 +20,28 @@ public class LoginTest extends BaseTest {
     }
 
     @Test
-    public void testLogin() {
+    public void testLogin() throws InterruptedException {
         mainPage.clickSignInLink();
         mainPage.enterEmail("pnmikov@gmail.com");
         mainPage.enterPassword("Fury@2024");
         mainPage.submitForm();
-        Assert.assertTrue(driver.findElement(mainPage.accountName).getText().contains("Peter Mikov"));
+        verifyTextContains(driver.findElement(mainPage.accountName), "Peter Mikov");
+        deleteAllCookies();
+        reloadPage();
+        verifyTextDoesNotContain(driver.findElement(mainPage.headerSignInLink), "Peter Mikov");
+        Thread.sleep(3000);
+    }
+
+    @Test
+    public void clickFirstProductInClothes() throws InterruptedException {
+        mainPage.signIn("pnmikov@gmail.com", "Fury@2024");
+        driver.findElement(mainPage.clothesMainLink).click();
+        Thread.sleep(2000);
+        driver.findElement(mainPage.firstProduct).click();
+        verifyTextEquals(driver.findElement(mainPage.firstProductHeadline), "HUMMINGBIRD PRINTED T-SHIRT");
+        deleteAllCookies();
+        reloadPage();
+        Thread.sleep(3000);
     }
 
     @AfterMethod

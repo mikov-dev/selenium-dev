@@ -3,17 +3,19 @@ package pagetests;
 import org.config.BaseTest;
 import org.pages.ActionsPage;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import java.util.List;
 
 public class ActionsPageTest extends BaseTest {
 
     ActionsPage actionsPage;
 
-    @BeforeTest
-    private void beforeTest() {
-        setUpWithChrome();
+    @BeforeClass
+    private void beforeClass() {
+        setUpWithChromeOptions(List.of("--start-maximized"));
         actionsPage = new ActionsPage(driver);
         driver.get(actionsPage.baseUrl);
     }
@@ -52,7 +54,7 @@ public class ActionsPageTest extends BaseTest {
         Assert.assertEquals(text, "The SHIFT key was pressed!");
     }
 
-    @AfterTest
+    @AfterClass
     private void tearDown() {
         driver.quit();
     }
