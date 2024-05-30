@@ -10,7 +10,8 @@ public class Verifications {
 
     Logger logger = Logger.getLogger("Verifications");
 
-    public void verifyTextContains(WebElement element, String text) {
+
+    public void textContains(WebElement element, String text) {
         try {
             Assert.assertTrue(element.getText().contains(text));
         } catch (AssertionError e) {
@@ -19,7 +20,7 @@ public class Verifications {
         }
     }
 
-    public void verifyTextDoesNotContain(WebElement element, String text) {
+    public void textDoesNotContain(WebElement element, String text) {
         try {
             Assert.assertFalse(element.getText().contains(text));
         } catch (AssertionError e) {
@@ -28,7 +29,16 @@ public class Verifications {
         }
     }
 
-    public void verifyTextEquals(WebElement element, String text) {
+    public void alertTextEquals(Alert alert, String text) {
+        try {
+            Assert.assertEquals(alert.getText(), text);
+        } catch (AssertionError e) {
+            logger.warning(e.getMessage());
+            throw new AssertionError(e);
+        }
+    }
+
+    public void textEquals(WebElement element, String text) {
         try {
             Assert.assertEquals(element.getText(), text);
         } catch (AssertionError e) {
@@ -37,9 +47,18 @@ public class Verifications {
         }
     }
 
-    public void verifyAlertTextEquals(Alert alert, String text) {
+    public void elementIsDisplayed(WebElement element) {
         try {
-            Assert.assertEquals(alert.getText(), text);
+            Assert.assertTrue(element.isDisplayed());
+        } catch (AssertionError e) {
+            logger.warning(e.getMessage());
+            throw new AssertionError(e);
+        }
+    }
+
+    public void elementContainsText(WebElement element, String text) {
+        try {
+            Assert.assertTrue(element.getText().contains(text));
         } catch (AssertionError e) {
             logger.warning(e.getMessage());
             throw new AssertionError(e);

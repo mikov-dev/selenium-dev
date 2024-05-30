@@ -14,7 +14,7 @@ public class AccordionPageTest extends BaseTest {
 
     @BeforeClass
     private void BeforeClass() {
-        setUpWithChrome();
+        setUpChoosingDriverFromProperties();
         accordionPage = new AccordionPage(driver);
         driver.get(accordionPage.baseUrl);
     }
@@ -25,8 +25,8 @@ public class AccordionPageTest extends BaseTest {
         accordionPage.clickPlatformPortability();
         WebElement platformPortabilityText = driver.findElement(accordionPage.platformPortabilityText);
         Thread.sleep(1000);
-        Assert.assertTrue(platformPortabilityText.isDisplayed());
-        Assert.assertTrue(platformPortabilityText.getText().contains("Testing is a repetitive process."));
+        verify.elementIsDisplayed(platformPortabilityText);
+        verify.elementContainsText(platformPortabilityText, "Testing is a repetitive process.");
     }
 
     @Test(description = "Verify that the language support accordion element is functional.")

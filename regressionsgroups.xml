@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="RegressionGroups">
+
+    <groups>
+        <run>
+            <include name="regression" />
+        </run>
+    </groups>
+
+    <test name="regressiontests">
+        <packages>
+            <package name="groups" />
+        </packages>
+    </test> <!--Test-->
+</suite> <!--Suite-->

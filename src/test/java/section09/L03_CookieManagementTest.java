@@ -28,10 +28,10 @@ public class L03_CookieManagementTest extends BaseTest {
         mainPage.enterEmail("pnmikov@gmail.com");
         mainPage.enterPassword("Fury@2024");
         mainPage.submitForm();
-        verifyTextContains(driver.findElement(mainPage.accountName), "Peter Mikov");
+        verify.textContains(driver.findElement(mainPage.accountName), "Peter Mikov");
         deleteAllCookies();
         reloadPage();
-        verifyTextDoesNotContain(driver.findElement(mainPage.headerSignInLink), "Peter Mikov");
+        verify.textDoesNotContain(driver.findElement(mainPage.headerSignInLink), "Peter Mikov");
         ScreenshotHelper.takeScreenShot(driver);
     }
 

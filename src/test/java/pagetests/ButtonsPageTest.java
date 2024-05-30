@@ -30,7 +30,7 @@ public class ButtonsPageTest extends BaseTest {
         moveToAndClick(buttonsPage.buttonTwo);
         Thread.sleep(1000);
         var text = driver.switchTo().alert();
-        verifyAlertTextEquals(text, "You clicked the second button!");
+        verify.alertTextEquals(text, "You clicked the second button!");
         //assert text.equals("You clicked the second button!");
     }
 

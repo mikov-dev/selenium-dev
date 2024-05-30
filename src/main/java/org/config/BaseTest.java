@@ -10,22 +10,61 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.Listeners;
+import org.utils.Listener;
+import org.utils.ScreenshotHelper;
 import org.verifications.Verifications;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 @Getter
 @Setter
-public class BaseTest extends Verifications {
+@Listeners(Listener.class)
+public class BaseTest {
 
     public WebDriver driver;
+    FileInputStream fis;
+    Properties prop;
     Actions actions;
     JavascriptExecutor js;
     WebElement element;
     ChromeOptions options;
     String chromedriverLocation = "src/main/resources/webdrivers/chromedriver.exe";
     String geckoDriverLocation = "src/main/resources/webdrivers/geckodriver.exe";
+
+    public Verifications verify = new Verifications();
+
+    WebDriver choseDriver() {
+        Properties prop = new Properties();
+        try {
+            fis = new FileInputStream("src/main/resources/loginData.properties");
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            prop.load(fis);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        if (prop.getProperty("browser").equals("chrome")) {
+            System.setProperty("webdriver.chrome.driver", chromedriverLocation);
+            driver = new ChromeDriver();
+        } else if (prop.getProperty("browser").equals("firefox")) {
+            System.setProperty("webdriver.gecko.driver", geckoDriverLocation);
+            driver = new FirefoxDriver();
+        }
+        return driver;
+    }
+
+    public void setUpChoosingDriverFromProperties() {
+        driver = choseDriver();
+        driver.manage().window().maximize();
+    }
 
     public void setUpWithChrome() {
         System.setProperty("webdriver.chrome.driver", chromedriverLocation);
@@ -158,5 +197,16 @@ public class BaseTest extends Verifications {
 
     public void reloadPage() {
         driver.navigate().refresh();
+    }
+
+    public Properties readPropertiesFile(String fileName) {
+        try {
+            fis = new FileInputStream(fileName);
+            prop = new Properties();
+            prop.load(fis);
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+        return prop;
     }
 }

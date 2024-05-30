@@ -4,13 +4,17 @@ import org.config.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import java.util.Properties;
+
 public class TestStoreMainPage extends BasePage {
 
+    public Properties properties;
 
     // Constructor
     public TestStoreMainPage(WebDriver driver) {
+        properties = readPropertiesFile("src/main/resources/loginData.properties");
         this.driver = driver;
-        baseUrl = "https://teststore.automationtesting.co.uk/index.php";
+        this.baseUrl = properties.getProperty("testStoreMainPageUrl");
     }
 
     // Page elements defined using By
@@ -22,6 +26,7 @@ public class TestStoreMainPage extends BasePage {
     public By submitButton = By.id("submit-login");
     public By accountName = By.cssSelector(".account span");
     public By headerSignInLink = By.cssSelector("a span.hidden-sm-down");
+    public By logoutLink = By.cssSelector("a.logout");
 
     public By clothesMainLink = By.id("category-3");
     public By firstProduct = By.cssSelector("a img[alt='Hummingbird printed t-shirt']");
@@ -64,6 +69,10 @@ public class TestStoreMainPage extends BasePage {
         enterEmail(email);
         enterPassword(password);
         submitForm();
+    }
+
+    public void signOut() {
+        driver.findElement(logoutLink).click();
     }
 
 }
