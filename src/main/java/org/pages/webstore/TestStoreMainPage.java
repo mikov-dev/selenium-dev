@@ -12,7 +12,7 @@ public class TestStoreMainPage extends BasePage {
 
     // Constructor
     public TestStoreMainPage(WebDriver driver) {
-        properties = readPropertiesFile("src/main/resources/loginData.properties");
+        properties = readPropertiesFile("src/main/resources/config.properties");
         this.driver = driver;
         this.baseUrl = properties.getProperty("testStoreMainPageUrl");
     }

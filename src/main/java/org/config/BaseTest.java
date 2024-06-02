@@ -5,6 +5,7 @@ import lombok.Setter;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -29,20 +30,21 @@ public class BaseTest {
 
     public WebDriver driver;
     FileInputStream fis;
-    Properties prop;
+    public Properties prop;
     Actions actions;
     JavascriptExecutor js;
     WebElement element;
     ChromeOptions options;
     String chromedriverLocation = "src/main/resources/webdrivers/chromedriver.exe";
     String geckoDriverLocation = "src/main/resources/webdrivers/geckodriver.exe";
+    String edgeDriverLocation = "src/main/resources/webdrivers/msedgedriver.exe";
 
     public Verifications verify = new Verifications();
 
-    WebDriver choseDriver() {
-        Properties prop = new Properties();
+    public BaseTest() {
+        prop = new Properties();
         try {
-            fis = new FileInputStream("src/main/resources/loginData.properties");
+            fis = new FileInputStream("src/main/resources/config.properties");
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -51,12 +53,18 @@ public class BaseTest {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    WebDriver choseDriver() {
         if (prop.getProperty("browser").equals("chrome")) {
             System.setProperty("webdriver.chrome.driver", chromedriverLocation);
             driver = new ChromeDriver();
         } else if (prop.getProperty("browser").equals("firefox")) {
             System.setProperty("webdriver.gecko.driver", geckoDriverLocation);
             driver = new FirefoxDriver();
+        } else if (prop.getProperty("browser").equals("edge")) {
+            System.setProperty("webdriver.edge.driver", edgeDriverLocation);
+            driver = new EdgeDriver();
         }
         return driver;
     }
@@ -76,6 +84,12 @@ public class BaseTest {
         System.setProperty("webdriver.chrome.driver", chromedriverLocation);
         options = new ChromeOptions();
         options.addArguments(chromeOptions);
+        driver = new ChromeDriver(options);
+    }
+
+    public void setUpWithBraveBrowser() {
+        System.setProperty("webdriver.chrome.driver", chromedriverLocation);
+        options = new ChromeOptions().setBinary("C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave.exe");
         driver = new ChromeDriver(options);
     }
 

@@ -7,7 +7,6 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.util.List;
 
 public class ActionsPageTest extends BaseTest {
 
@@ -15,9 +14,11 @@ public class ActionsPageTest extends BaseTest {
 
     @BeforeClass
     private void beforeClass() {
-        setUpWithChromeOptions(List.of("--start-maximized"));
+        setUpWithBraveBrowser();
+        //setUpWithChromeOptions(List.of("--start-maximized"));
         actionsPage = new ActionsPage(driver);
         driver.get(actionsPage.baseUrl);
+        driver.manage().window().maximize();
     }
 
     @Test(description = "verify the drag and drop action")

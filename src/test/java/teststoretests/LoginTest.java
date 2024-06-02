@@ -11,19 +11,22 @@ public class LoginTest extends BaseTest {
 
     TestStoreMainPage mainPage;
 
+    public LoginTest() {
+        super();
+    }
+
     @DataProvider
     public Object[][] loginDataProvider() {
-        mainPage = new TestStoreMainPage(driver);
         String[][] data = new String[3][2];
 
-        data[0][0] = mainPage.properties.getProperty("firstEmail");
-        data[0][1] = mainPage.properties.getProperty("firstPassword");
+        data[0][0] = prop.getProperty("firstEmail");
+        data[0][1] = prop.getProperty("firstPassword");
 
-        data[1][0] = mainPage.properties.getProperty("secondEmail");
-        data[1][1] = mainPage.properties.getProperty("secondPassword");
+        data[1][0] = prop.getProperty("secondEmail");
+        data[1][1] = prop.getProperty("secondPassword");
 
-        data[2][0] = mainPage.properties.getProperty("thirdEmail");
-        data[2][1] = mainPage.properties.getProperty("thirdPassword");
+        data[2][0] = prop.getProperty("thirdEmail");
+        data[2][1] = prop.getProperty("thirdPassword");
 
         return data;
     }
